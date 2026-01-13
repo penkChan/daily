@@ -1,7 +1,17 @@
+"use client";
 import Card from "@/components/Card";
 import { BookOpenCheck } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 export default function Home() {
+  const [email, setEmail] = useState("");
+  const handleSubscribe = () => {
+    fetch("/api/subscribe", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+    console.log(email);
+  };
   return (
     <div className="min-h-screen bg-white">
       <header className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
@@ -33,8 +43,11 @@ export default function Home() {
             type="email"
             placeholder="Enter your emial"
             className="w-full max-w-md p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onClick={handleSubscribe}>
             Subscribe
           </button>
         </div>
