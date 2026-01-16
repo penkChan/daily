@@ -3,14 +3,34 @@ import Card from "@/components/Card";
 import { BookOpenCheck } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 export default function Home() {
   const [email, setEmail] = useState("");
   const handleSubscribe = () => {
+    if (email === undefined || email.trim() === "") {
+      toast.error("Email is required");
+      return;
+    }
     fetch("/api/subscribe", {
       method: "POST",
       body: JSON.stringify({ email }),
-    });
-    console.log(email);
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          toast.error(data.error);
+        } else {
+          toast.success("Subscribed successfully");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Failed to subscribe");
+      })
+      .finally(() => {
+        setEmail("");
+      });
   };
   return (
     <div className="min-h-screen bg-white">
@@ -46,8 +66,10 @@ export default function Home() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={handleSubscribe}>
+          <button
+            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={handleSubscribe}
+          >
             Subscribe
           </button>
         </div>
