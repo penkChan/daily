@@ -3,10 +3,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ### AI 新闻每日推送网站
 
 AI 新闻每日推送网站
-使用 nextjs 创建, tailwindcss 创建 UI
+使用 nextjs 创建项目, tailwindcss 创建 UI
 使用 resend 发送邮件
 使用 rss-parser 获取新闻
-使用 inngest 集成工作流
+使用 inngest 集成工作流 定时任务
 
 ### 教程源于
 
