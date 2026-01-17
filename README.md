@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+### AI 新闻每日推送网站
+
+AI 新闻每日推送网站
+使用 nextjs 创建, tailwindcss 创建 UI
+使用 resend 发送邮件
+使用 rss-parser 获取新闻
+使用 inngest 集成工作流
+
+### 教程源于
+
+[https://www.bilibili.com/video/BV1BgB8BrE2m?spm_id_from=333.788.player.switch&vd_source=936f7d81a34825a1b35c6d91507737c3&p=3]
+
 ## Getting Started
 
 First, run the development server:
@@ -34,8 +46,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-### AI新闻每日推送网站
-### 教程源于
-[https://www.bilibili.com/video/BV1BgB8BrE2m?spm_id_from=333.788.player.switch&vd_source=936f7d81a34825a1b35c6d91507737c3&p=3]

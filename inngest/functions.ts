@@ -13,7 +13,8 @@ export const helloWorld = inngest.createFunction(
 
 export const sendDailyNews = inngest.createFunction(
   { id: "send-daily-news" },
-  { event: "test/send.daily.news" },
+  // { event: "test/send.daily.news" },
+  { cron: "15 4 * * *" }, // 每天早上12点 UTC 时间
   async ({ event, step }) => {
     // 1. 从多个RSS源获取新闻
     const newsItems = await step.run("fetch-news", async () => {
@@ -35,8 +36,11 @@ export const sendDailyNews = inngest.createFunction(
       const result = await resend.broadcasts.create({
         from: "Daily Briefs <onboarding@resend.dev>",
         segmentId: process.env.RESEND_SEGMENT_ID as string,
-        subject:
-          `Daily Briefs - ${new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}`,
+        subject: `Daily Briefs - ${new Date().toLocaleDateString("zh-CN", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}`,
         html: newsSummary.html,
         text: "123",
       });
@@ -46,13 +50,10 @@ export const sendDailyNews = inngest.createFunction(
       throw new Error("Error sending email: " + error.message);
     }
     // 4. 发送邮件
-    const { error: sendError } = await step.run(
-      "send-email",
-      async () => {
-        const result = await resend.broadcasts.send(data.id);
-        return result;
-      }
-    );
+    const { error: sendError } = await step.run("send-email", async () => {
+      const result = await resend.broadcasts.send(data.id);
+      return result;
+    });
     if (sendError) {
       return { error: sendError.message };
     }
